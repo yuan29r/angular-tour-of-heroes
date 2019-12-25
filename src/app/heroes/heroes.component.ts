@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../Hero';
-import { HEROES } from '../mock-heroes';
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
@@ -9,15 +9,22 @@ import { HEROES } from '../mock-heroes';
 })
 
 export class HeroesComponent implements OnInit {
-  constructor() { }
-  // hero: Hero = { id: 1, name: 'Windstorm' };
-  heroes = HEROES;
+
+  constructor(private heroService: HeroService) { }
+
+  heroes: Hero[];
   selectedHero: Hero;
 
   ngOnInit() {
+    this.getHeroes();
   }
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+  }
+
+  getHeroes(): void {
+    // this.heroes = this.heroService.getHeroes(); // 這是同步寫法
+    this.heroService.getHeroes().subscribe(h => this.heroes = h); // 這是非同步寫法，Observable.subscribe() 是關鍵的差異點
   }
 }
