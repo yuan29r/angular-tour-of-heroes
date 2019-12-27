@@ -29,4 +29,19 @@ export class HeroesComponent implements OnInit {
     // this.heroes = this.heroService.getHeroes(); // 這是同步寫法
     this.heroService.getHeroes().subscribe(h => this.heroes = h); // 這是非同步寫法，Observable.subscribe() 是關鍵的差異點
   }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService
+      .addHero({ name } as Hero)
+      .subscribe(h => {
+        this.heroes.push(h);
+      });
+  }
+
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
+  }
 }

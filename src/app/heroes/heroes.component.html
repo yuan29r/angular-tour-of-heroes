@@ -4,9 +4,21 @@
     <a [routerLink]="[ '/detail', hero.id ]">
       <span class="badge">{{hero.id}}</span> {{hero.name}}
     </a>
+    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
   </li>
 </ul>
 
-<!--
+<!--這原本是用屬性模式(@input),把明細嵌入在這邊
   <app-hero-detail [hero]="selectedHero"></app-hero-detail>
 -->
+
+<!--add-->
+<div>
+  <label>Hero name:
+    <input #heroName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
+</div>
