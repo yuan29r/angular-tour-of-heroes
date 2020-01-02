@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
 // route清單
+// { path: '', redirectTo: '/dashboard', pathMatch: 'full' } 這寫法是預設模式，讓頁面一打開就預設式儀表板功能
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
